@@ -43,6 +43,8 @@ I found these websites useful in developing this software:
 * [React Hook Form](https://react-hook-form.com/get-started)
 * [Expo ImagePicker](https://docs.expo.dev/versions/latest/sdk/imagepicker/)
 * [Splash screen and app icon](https://docs.expo.dev/develop/user-interface/splash-screen-and-app-icon/)
+* [Freepik](https://www.freepik.com/)
+* [[2025] Expo App Icon and Splash Screen Tutorial](https://www.youtube.com/watch?v=77mVhKiBCsE)
 * [w3schools](https://www.w3schools.com/kotlin/index.php)
 * [Create your first Android App](https://developer.android.com/codelabs/basic-android-kotlin-compose-first-app#1)
 * [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course)
