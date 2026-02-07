@@ -4,7 +4,7 @@ Travel Journal
 
 ## Instructions for Build and Use
 
-[Software Demo]()
+[Software Demo](https://youtu.be/Euhua37xyEU)
 
 Steps to build and/or run the software:
 
