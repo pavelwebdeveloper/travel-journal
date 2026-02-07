@@ -8,22 +8,29 @@ Travel Journal
 
 Steps to build and/or run the software:
 
-1. In order to run the software check if you have Android Studio installed
-2. Run "git clone https://github.com/pavelwebdeveloper/travel_journal.git" locally on your computer in CMD
-3. 
-4. 
-5. 
+1. In order to run the software check if you have Python installed by running "node -v"
+2. Run "git clone https://github.com/pavelwebdeveloper/travel-journal.git" locally on your computer in CMD
+3. run "npm install" to install all necessary node modules
+4. run "npx expo start" in order to start the app locally
+5. then follow instructions in order to download, to install and to start the app on your android device 
 
 Instructions for using the software:
 
-1. 
-2. 
+1. you can start the app by clicking the installed app icon on your Android device
+2. You can add travel notes with photos from your gallery
+3. You can delete unnecessary notes
+4. You can update notes, see a preview list of notes
 
 ## Development Environment
 
 To recreate the development environment, you need the following software and/or libraries with the specified versions:
 
-* Android Studio
+* Visual Studio Code
+* node.js 
+* Expo React Native framework
+* expo-sqlite api: version ~ 16.0.10
+* expo-image-picker: version ~17.0.10
+* react-hook-form: version 7.71.1 or higher 
 
 ## Useful Websites to Learn More
 
@@ -44,3 +51,8 @@ I found these websites useful in developing this software:
 * [ChatGPT](https://chatgpt.com/)
 
 ## Future Work
+
+The following items I plan to fix, improve, and/or add to this project in the future:
+
+* [ ] To add error checking for inputs
+* [ ] To improve the app's design
