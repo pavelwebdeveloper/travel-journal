@@ -5,12 +5,14 @@ import { getAllNotes, initDB, Note as NoteType } from "../database/db";
 import Note from "./NotePreview";
 
 const App = () => {
+    // setting up state for notes with Note type
     const [notes, setNotes] = useState<NoteType[]>([]);
 
+    // getting the dimension of the screen
     const { width } = Dimensions.get("window");
 
+    // setting up the router in order to use it
     const router = useRouter();
-    //const navigation = useNavigation();
 
     useFocusEffect(
       useCallback(() => {
@@ -23,6 +25,7 @@ const App = () => {
     );
     
 
+    // returning what will be displayed in the view
     return (
     <View>
       <Image
@@ -50,6 +53,7 @@ const App = () => {
   );
 }
 
+// styles for the returned view
 const styles = StyleSheet.create({
     heading:{
       fontWeight:'bold',

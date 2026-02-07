@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, FlatList, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { addNote, getNote, getPhotosForNote, Note, updateNote } from "../database/db";
 
+// Form type
 type FormData = {
     noteTitle: string,
     noteContent: string
@@ -12,14 +13,19 @@ type FormData = {
 
 export default function addUpdateNote() {
 
+    // getting note id if passed from another view
     const { noteId } = useLocalSearchParams<{noteId: string}>();
 
+    // setting up note state
     const [note, setNote] = useState<Note>();
 
+    // setting up state for photos array
     const [photos, setPhotos] = useState<string[]>([]);
 
+    // state to see if photos loaded
     const [photosLoaded, setPhotosLoaded] = useState(false);
 
+    // setting up the form and handling its state and submission
     const {
         control,
         handleSubmit,
@@ -32,8 +38,7 @@ export default function addUpdateNote() {
         }
     });
 
-    //if(noteId != null){
-
+// getting a not by its id and setting the note constant state
         useEffect(() => {
                     (async () => {
                         const note = await getNote(Number(noteId)); // getting all notes from database
@@ -43,7 +48,8 @@ export default function addUpdateNote() {
                         
                     })();
                 }, [noteId]);
-            
+ 
+        // resetting the value of noteTitle and noteContent attributes of Form type
         useEffect(() => {
                 reset({
                     noteTitle: note?.noteTitle,
@@ -51,9 +57,12 @@ export default function addUpdateNote() {
                 })
                 }, [note, reset]);
 
+
         useEffect(() => {
+            // finding out if a note id has been provided or photos are loaded
             if(!noteId || photosLoaded) return
             
+            // getting photos for the note and setting photos constant
                 (async () => {
                             const dbPhotos = await getPhotosForNote(Number(noteId)); // getting all notes from database
                             setPhotos(dbPhotos.map(photo => photo.photoPath)); // set notes with notes returned from database
@@ -61,7 +70,7 @@ export default function addUpdateNote() {
                         })();
                           
                 }, [noteId, photosLoaded]);
-    //}
+    
 
     const router = useRouter();
 
@@ -69,7 +78,7 @@ export default function addUpdateNote() {
 
     
 
-    // logic that allows to select photos from gallery
+    // logic that allows to select photos from gallery and adding them to photos constant
     const pickPhoto = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: "images",
@@ -86,7 +95,7 @@ export default function addUpdateNote() {
     }
 
     
-
+// processing data submitted through the form
     const onSubmit = async (data: FormData) => {
 
         const properPhotos = photos.filter(
@@ -107,6 +116,7 @@ export default function addUpdateNote() {
         
     }
 
+// returning what will be displayed in the view
   return (
     <View style={styles.noteContainer}>
         <View>
@@ -180,6 +190,7 @@ export default function addUpdateNote() {
   );
 }
 
+// styles for the returned view
 const styles = StyleSheet.create({
     noteContainer: {
         margin: 10

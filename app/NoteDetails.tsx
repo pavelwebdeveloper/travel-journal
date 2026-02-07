@@ -47,7 +47,8 @@ const NoteDetails = () => {
             
         }
 
-    //return <Text>Hello, I am a note!!!!</Text>
+
+    // returning what will be displayed in the view    
     return (
             <View style={styles.noteContainer}>
                 <Text style={styles.label}>Note Title: </Text><Text>{ note?.noteTitle }</Text>
@@ -90,6 +91,7 @@ const NoteDetails = () => {
     );
 }
 
+// styles for the returned view
 const styles = StyleSheet.create({
     noteContainer: {
         margin: 10

@@ -17,6 +17,7 @@ export type Photo = {
     photoPath: string;
 }
 
+// initiating the work of the database with the types or tables
 async function getDB(): Promise<SQLite.SQLiteDatabase>{
     if(!db){
         db = await SQLite.openDatabaseAsync('travel-journal.db');
@@ -46,6 +47,7 @@ export const initDB = async (): Promise<void> => {
     `)
 };
 
+// adding note with photos function
 export const addNote = async (
     noteTitle: string,
     noteContent: string,
@@ -68,6 +70,7 @@ export const addNote = async (
     }
 };
 
+// updating note
 export const updateNote = async (
     noteId: number,
     noteTitle: string,
@@ -82,8 +85,6 @@ export const updateNote = async (
     );
 
     await deletePhotos(noteId);
-
-    //const noteId = result.lastInsertRowId as number;
 
     for (const photo of photos) {
             await db.runAsync(
@@ -146,6 +147,7 @@ export const getPhotosForNote = async(
     );
 };
 
+// deleting photos from photos table
 async function deletePhotos(note_Id: number) {
     if(!note_Id) return;
 

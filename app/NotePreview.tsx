@@ -19,7 +19,7 @@ const Note = ({ note }: Props) => {
             })();
         }, [note.noteId]);
 
-    //return <Text>Hello, I am a note!!!!</Text>
+    // returning what will be displayed in the view
     return (
         <Pressable style={styles.notePreviwContainer} onPress={
             () =>
@@ -50,6 +50,8 @@ const Note = ({ note }: Props) => {
     );
 }
 
+
+// styles for the returned view
 const styles = StyleSheet.create({
     notePreviwContainer:{
         borderBottomColor:'black',
