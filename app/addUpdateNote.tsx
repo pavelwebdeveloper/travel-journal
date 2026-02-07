@@ -2,7 +2,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Button, FlatList, Image, Text, TextInput, View } from "react-native";
+import { Button, FlatList, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { addNote, getNote, getPhotosForNote, Note, updateNote } from "../database/db";
 
 type FormData = {
@@ -108,7 +108,7 @@ export default function addUpdateNote() {
     }
 
   return (
-    <View>
+    <View style={styles.noteContainer}>
         <View>
             <Button title={(noteId != null) ? "Add or delete 1 or more photos" : "Add 1 or more photos"} onPress={pickPhoto}></Button>
             {photos.length > 0 && (
@@ -118,19 +118,27 @@ export default function addUpdateNote() {
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(item) => item}
                     renderItem={({item}) => (
-                        <View>
+                        <View style={styles.imageContainer}>
                             <Image
                                 source={{ uri: item }}
-                                style={{ width:100, height:100 }}
+                                style={styles.image}
                             />
-                            <Button title="Delete photo" onPress={() => setPhotos(prev => prev.filter(photo => photo !== item))}></Button>
+                            <Pressable
+                                style={styles.deleteButton}
+                                onPress={() => 
+                                    setPhotos(prev => prev.filter(photo => photo !== item))
+                                }
+                            >
+                                <Text style={styles.deleteButtonText}>Delete photo</Text>
+                            </Pressable>
                         </View>
                     )}
 
                 />
             )}
         </View>
-        <Text>{(noteId != null) ? "Update Note Title" : "Add Note Title"}</Text>
+        <View style={styles.verticalSpace}></View>
+        <Text style={styles.label}>{(noteId != null) ? "Update Note Title" : "Add Note Title"}</Text>
         <Controller
             control={control}
             
@@ -149,7 +157,7 @@ export default function addUpdateNote() {
         />
         {errors.noteTitle && <Text>Note title is required</Text>} 
         
-        <Text>{(noteId != null) ? "Update Note Text" : "Add Note Text"}</Text>
+        <Text style={styles.label}>{(noteId != null) ? "Update Note Text" : "Add Note Text"}</Text>
         <Controller
             control={control}
             rules={{
@@ -171,3 +179,31 @@ export default function addUpdateNote() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    noteContainer: {
+        margin: 10
+    },
+    label:{
+        fontWeight:'bold'
+    },
+    image: {
+      margin:10,
+      width:100, 
+      height:100
+    },
+    imageContainer: {
+        padding: 2
+    },
+    deleteButton: {
+        backgroundColor: 'red'
+    },
+    deleteButtonText: {
+        color: 'white',
+        textAlign:'center',
+        padding:3
+    },
+    verticalSpace: {
+        height:30
+    }
+  });

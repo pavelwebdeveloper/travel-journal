@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Button, FlatList, Image, Text, View } from "react-native";
+import { Button, FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Note, Photo, deleteNote, getNote, getPhotosForNote } from "../database/db";
 
 type Props = {
@@ -49,9 +49,9 @@ const NoteDetails = () => {
 
     //return <Text>Hello, I am a note!!!!</Text>
     return (
-            <View>
-                <Text>{ note?.noteTitle }</Text>
-                <Text>{ note?.noteContent }</Text>
+            <View style={styles.noteContainer}>
+                <Text style={styles.label}>Note Title: </Text><Text>{ note?.noteTitle }</Text>
+                <Text style={styles.label}>Note Text: </Text><Text>{ note?.noteContent }</Text>
                 {photos.length > 0 && (
                                 <FlatList
                                     data={photos}
@@ -61,7 +61,7 @@ const NoteDetails = () => {
                                     renderItem={({item}) => (
                                         <Image
                                             source={{ uri: item.photoPath }}
-                                            style={{ width:100, height:100 }}
+                                            style={styles.image}
                                         />
                                     )}
                 
@@ -79,12 +79,43 @@ const NoteDetails = () => {
                                     })
                                     }
                                   ></Button>
-
-                            <Button 
-                                title="Delete the note" 
-                                onPress={deleteTheNote}/>
+                                <View style={styles.verticalSpace}></View>
+                                  <Pressable
+                                        style={styles.deleteButton}
+                                        onPress={deleteTheNote}
+                                        >
+                                        <Text style={styles.deleteButtonText}>Delete the note</Text>
+                                    </Pressable>                            
             </View>
     );
 }
+
+const styles = StyleSheet.create({
+    noteContainer: {
+        margin: 10
+    },
+    label:{
+        fontWeight:'bold'
+    },
+    image: {
+      margin:10,
+      width:100, 
+      height:100
+    },
+    imageContainer: {
+        padding: 2
+    },
+    deleteButton: {
+        backgroundColor: 'red'
+    },
+    deleteButtonText: {
+        color: 'white',
+        textAlign:'center',
+        padding:10
+    },
+    verticalSpace: {
+        height:30
+    }
+  });
 
 export default NoteDetails;

@@ -1,6 +1,6 @@
 import { useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { Button, Dimensions, FlatList, Image, Text, View } from "react-native";
+import { Button, Dimensions, FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { getAllNotes, initDB, Note as NoteType } from "../database/db";
 import Note from "./NotePreview";
 
@@ -27,12 +27,13 @@ const App = () => {
     <View>
       <Image
       source={require('../assets/images/20221015_153125.jpg')}
-      style={{
+      style={[{
         width:width, 
         height:width * 0.5
-      }}
+      }]}
       ></Image>
-      <Text>The notes !!!</Text>
+      <Text style={styles.heading}>Travel Notes List</Text>
+      <View style={styles.verticalSpace}></View>
       <FlatList 
         data={notes}
         style={{ height: 400 }}
@@ -48,5 +49,16 @@ const App = () => {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    heading:{
+      fontWeight:'bold',
+      textAlign:'center',
+      fontSize:30
+    },
+    verticalSpace: {
+        height:30
+    }
+  });
 
 export default App;
